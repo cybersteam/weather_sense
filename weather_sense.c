@@ -5,7 +5,6 @@ HARDWARE
     16 x 2 LCD display
 
 */
-
 //SPI lib for communicating with the BME280
 #include <SPI.h>
 #include <Wire.h>
@@ -29,7 +28,7 @@ void setup() {
   if (!bme.begin(BME_CS)) {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
     while (1);
-  }
+}
 
   Serial.begin(9600);
   Serial.println("BME280 test");
