@@ -3,7 +3,6 @@ HARDWARE
     Arduino Uno
     BME280 - sensor for temp, humidity & barometric
     16 x 2 LCD display
-
 */
 //SPI lib for communicating with the BME280
 #include <SPI.h>
@@ -30,8 +29,8 @@ void setup() {
     while (1);
 }
 
-  Serial.begin(9600);
-  Serial.println("BME280 test");
+Serial.begin(9600);
+Serial.println("BME280 test");
 }
 
 void readWeatherData() {
