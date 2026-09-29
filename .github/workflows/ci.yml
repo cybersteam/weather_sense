@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  host:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S . -B build/host -DWS_TARGET=host
+      - name: Build
+        run: cmake --build build/host
+      - name: Test
+        run: ctest --test-dir build/host --output-on-failure
+
+  firmware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the AVR toolchain
+        run: sudo apt-get update && sudo apt-get install -y gcc-avr avr-libc binutils-avr
+      - name: Configure
+        run: cmake -S . -B build/avr -DWS_TARGET=avr -DCMAKE_TOOLCHAIN_FILE=cmake/avr-gcc.cmake
+      - name: Build
+        run: cmake --build build/avr
